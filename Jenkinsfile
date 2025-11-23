@@ -21,7 +21,7 @@ pipeline
         {
             steps()
             {
-                sh 'mv clean package'
+                sh 'mvn clean package'
             }
         }
     } 
