@@ -36,5 +36,22 @@ pipeline
                 sh 'docker build -t 047719650789.dkr.ecr.eu-west-2.amazonaws.com/maven-we-application:${buildNumber} .'
             }
         }
+
+        stage('Authenticate and Push docker image to AWS ECR')
+        {
+            steps()
+            {
+                sh 'aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin 047719650789.dkr.ecr.eu-west-2.amazonaws.com'
+                sh 'docker push 047719650789.dkr.ecr.eu-west-2.amazonaws.com/maven-we-application:${buildNumber}'
+            }
+        }
+
+        stage('Remove the Image from the server')
+        {
+            steps()
+            {
+                sh 'docker rmi 047719650789.dkr.ecr.eu-west-2.amazonaws.com/maven-we-application:${buildNumber}'
+            }
+        }
     } 
 }
