@@ -70,5 +70,6 @@ pipeline
                 sh 'kubectl apply -f MavenWebApplication.yaml'
             }
         }
+        
     } 
 }
