@@ -53,5 +53,22 @@ pipeline
                 sh 'docker rmi 047719650789.dkr.ecr.eu-west-2.amazonaws.com/maven-we-application:${buildNumber}'
             }
         }
+
+        stage('UpdateImage tage in the K8s Manifest File')
+        {
+            steps()
+            {
+                sh "sed -i 's/Build_Tag/${buildNumber}/g' MavenWebApplication.yaml"
+            }
+        }
+
+        stage('Deploy application in AWS EKS Cluster')
+        {
+            steps()
+            {
+                sh 'kubectl delete deployment webpage-deployment -n production || true'
+                sh 'kubectl apply -f MavenWebApplication.yaml'
+            }
+        }
     } 
 }
