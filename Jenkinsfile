@@ -33,7 +33,7 @@ pipeline
         {
             steps()
             {
-                'sh docker build -t 047719650789.dkr.ecr.eu-west-2.amazonaws.com/maven-we-application:${buildNumber} .'
+                sh 'docker build -t 047719650789.dkr.ecr.eu-west-2.amazonaws.com/maven-we-application:${buildNumber} .'
             }
         }
     } 
