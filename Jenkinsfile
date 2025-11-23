@@ -6,7 +6,7 @@ pipeline
     {
         stage('Checkout code from GIThub')
         {
-            step()
+            steps()
             {
                 git branch: 'DevopsMay', url: 'https://github.com/PranikTech/maven-web-application.git'
             }
